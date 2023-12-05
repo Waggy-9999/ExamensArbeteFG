@@ -70,10 +70,12 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // Use EasingManager to ease the card back to its start position
-        if(easingManager != null)
+        // If there is a placeholder, ease to its position; otherwise, ease back to the start position
+        Vector3 targetPosition = placeholder != null ? placeholder.transform.position : startPosition;
+
+        if (easingManager != null)
         {
-            easingManager.EaseToPosition(gameObject, startPosition);
+            easingManager.EaseToPosition(gameObject, targetPosition);
         }
 
         // Reset parent
