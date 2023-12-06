@@ -75,7 +75,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         if (easingManager != null)
         {
-            easingManager.EaseToPosition(gameObject, targetPosition);
+            easingManager.MoveWithEasing(gameObject, targetPosition);
         }
 
         // Reset parent

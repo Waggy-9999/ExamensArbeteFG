@@ -7,10 +7,13 @@ public class EasingManager : MonoBehaviour
     // Duration of the ease animation
     public float easeDuration = 2;
 
-    // Method to move a GameObject with easing
-    public void EaseToPosition(GameObject objectToMove, Vector3 targetPosition)
+    // Centralized method to move a GameObject with easing
+    public void MoveWithEasing(GameObject objectToMove, Vector3 targetPosition, float duration = -1, LeanTweenType easingType = LeanTweenType.easeInOutSine)
     {
-        LeanTween.move(objectToMove, targetPosition, easeDuration).setEaseInOutSine();
+        if (duration < 0)
+        {
+            duration = easeDuration;
+        }
+        LeanTween.move(objectToMove, targetPosition, duration).setEase(easingType);
     }
 }
-
