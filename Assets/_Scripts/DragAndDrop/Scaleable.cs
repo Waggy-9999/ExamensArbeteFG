@@ -21,12 +21,14 @@ public class Scaleable : MonoBehaviour
 
     void OnMouseEnter()
     {
+        Debug.Log("mouse enter");
         // Scale up when hovering
         LeanTween.scale(gameObject, hoverscale, scaleDuration).setEase(LeanTweenType.easeOutExpo);
     }
 
     void OnMouseExit()
     {
+        Debug.Log("mouse exit");
         // Reset the scale to normal
         LeanTween.scale(gameObject, originalScale, scaleDuration).setEase(LeanTweenType.easeOutExpo);
     }

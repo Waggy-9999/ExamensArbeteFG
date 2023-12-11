@@ -44,7 +44,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
-        //Debug.Log("OnDrag");
+        Debug.Log("OnDrag");
 
         this.transform.position = eventData.position; // this is the position of the mouse
 
@@ -81,7 +81,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         // Reset parent
         transform.SetParent(originalParent);
 
-        Debug.Log("OnEndDrag");
+        //Debug.Log("OnEndDrag");
         this.transform.SetParent(parentToReturnTo);
         this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex()); // set the sibling index of the card to the sibling index of the placeholder
         GetComponent<CanvasGroup>().blocksRaycasts = true;

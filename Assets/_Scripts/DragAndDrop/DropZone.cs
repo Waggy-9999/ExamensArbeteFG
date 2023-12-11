@@ -43,14 +43,6 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
-
-        Draggable d = eventData.pointerDrag.GetComponent<Draggable>(); // get the draggable component of the card
-        if (d != null)
-        {
-            if(typeOfItem == d.typeOfItem) {
-                d.parentToReturnTo = this.transform; // set the parent of the card to the dropzone
-            }
-        }
+        // rest of your code
     }
 }
