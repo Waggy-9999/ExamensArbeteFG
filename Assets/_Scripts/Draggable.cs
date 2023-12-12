@@ -39,7 +39,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         placeholderParent = parentToReturnTo;
         this.transform.SetParent(this.transform.parent.parent);
 
-        GetComponent<CanvasGroup>().blocksRaycasts = false; // this is so that the raycast doesn't hit the card
+        //GetComponent<CanvasGroup>().blocksRaycasts = false; // this is so that the raycast doesn't hit the card
     }
 
     public void OnDrag(PointerEventData eventData)

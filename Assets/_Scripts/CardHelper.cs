@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utility.Easing;
 
 public class CardHelper : MonoBehaviour
 {
-    [SerializeField] private float GrowSpeed = 1f;
+    [SerializeField] private float GrowSpeed = 10f;
     [SerializeField] private float GrowFactor = 1.4f; // How buch bigger the card will grow
     private Vector3 originalScale; // original scale of the card
     private float growValue = 0f;
     private GameObject cardReference;
     public void GrowCard(GameObject card)
     {
-        StopCoroutine("Shrink");
+        if (cardReference != null) // if there is a card already growing, shrink it
+        {
+            StopCoroutine("Grow");
+            StartCoroutine("Shrink");
+        }
         cardReference = card;
         StartCoroutine("Grow");
     }
@@ -26,7 +31,8 @@ public class CardHelper : MonoBehaviour
         while (growValue < 1f)
         {
             growValue += Time.unscaledDeltaTime * GrowSpeed;
-            cardReference.transform.localScale = Vector3.Lerp(originalScale, originalScale * GrowFactor, growValue);
+            float easedGrowValue = Functions.GetEaseValue(EasingType.SineIn, growValue);
+            cardReference.transform.localScale = Vector3.Lerp(originalScale, originalScale * GrowFactor, easedGrowValue);
             yield return null;
         }
     }
@@ -35,7 +41,8 @@ public class CardHelper : MonoBehaviour
         while (growValue > 0f)
         {
             growValue -= Time.unscaledDeltaTime * GrowSpeed;
-            cardReference.transform.localScale = Vector3.Lerp(originalScale, originalScale * GrowFactor, growValue);
+            float easedGrowValue = Functions.GetEaseValue(EasingType.SineIn, growValue);
+            cardReference.transform.localScale = Vector3.Lerp(originalScale, originalScale * GrowFactor, easedGrowValue);
             yield return null;
         }
     }
