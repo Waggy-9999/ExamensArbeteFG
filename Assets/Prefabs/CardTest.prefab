@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5, y: -3.5348969}
+  m_AnchoredPosition: {x: 5, y: -3.534912}
   m_SizeDelta: {x: 140, y: 22.0027}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2241933117854695557
@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 1368352971}
   - component: {fileID: 1368352974}
   - component: {fileID: 1368352977}
+  - component: {fileID: 733675012}
   m_Layer: 5
   m_Name: CardTest
   m_TagString: Untagged
@@ -305,6 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrowSpeed: 10
   GrowFactor: 1.4
+  easingType: 0
 --- !u!114 &1368352974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,6 +364,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0852b60fe62351643a11fe428f75867b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &733675012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241933117945761930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 425f52f49f7f8ab4a8cd26fe8ec1a499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flyAwayTarget: {fileID: 0}
+  moveSpeed: 3
+  closeEnoughDistance: 0.1
+  easingType: 0
 --- !u!1 &2241933118016512601
 GameObject:
   m_ObjectHideFlags: 0
