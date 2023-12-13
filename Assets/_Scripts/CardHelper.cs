@@ -10,6 +10,7 @@ public class CardHelper : MonoBehaviour
     private Vector3 originalScale; // original scale of the card
     private float growValue = 0f;
     private GameObject cardReference;
+    [SerializeField] private EasingType easingType = EasingType.SineIn;
     public void GrowCard(GameObject card)
     {
         if (cardReference != null) // if there is a card already growing, shrink it
@@ -31,7 +32,7 @@ public class CardHelper : MonoBehaviour
         while (growValue < 1f)
         {
             growValue += Time.unscaledDeltaTime * GrowSpeed;
-            float easedGrowValue = Functions.GetEaseValue(EasingType.SineIn, growValue);
+            float easedGrowValue = Functions.GetEaseValue(easingType, growValue);
             cardReference.transform.localScale = Vector3.Lerp(originalScale, originalScale * GrowFactor, easedGrowValue);
             yield return null;
         }

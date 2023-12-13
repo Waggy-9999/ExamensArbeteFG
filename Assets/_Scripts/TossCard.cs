@@ -1,13 +1,16 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Utility.Easing;
 public class TossCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private Vector2 offset;
     private bool isMovingToCenter;
     private bool isFlyingAway;
     [SerializeField] private GameObject flyAwayTarget;
-    [SerializeField] private float moveSpeed = 1f; // Speed at which the card moves to the center and flies away
-    [SerializeField] private float closeEnoughDistance = 0.1f; // Distance at which the card is considered close enough to its target
+    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float closeEnoughDistance = 0.1f;
+    [SerializeField] private EasingType easingType = EasingType.SineIn; // Easing type to use
+    private float moveValue = 0f; // Value to use for easing
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -38,19 +41,25 @@ public class TossCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         if (isMovingToCenter)
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(Screen.width / 2, Screen.height / 2, 0), Time.deltaTime * moveSpeed);
+            moveValue += Time.unscaledDeltaTime * moveSpeed;
+            float easedMoveValue = Functions.GetEaseValue(easingType, moveValue);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(Screen.width / 2, Screen.height / 2, 0), easedMoveValue);
             if (Vector3.Distance(transform.position, new Vector3(Screen.width / 2, Screen.height / 2, 0)) < closeEnoughDistance)
             {
                 isMovingToCenter = false;
                 isFlyingAway = true;
+                moveValue = 0f; // Reset moveValue
             }
         }
         else if (isFlyingAway)
         {
-            transform.position = Vector3.Lerp(transform.position, flyAwayTarget.transform.position, Time.deltaTime * moveSpeed); // Use the position of flyAwayTarget
-            if (Vector3.Distance(transform.position, flyAwayTarget.transform.position) < closeEnoughDistance) // Use the position of flyAwayTarget
+            moveValue += Time.unscaledDeltaTime * moveSpeed;
+            float easedMoveValue = Functions.GetEaseValue(easingType, moveValue);
+            transform.position = Vector3.Lerp(transform.position, flyAwayTarget.transform.position, easedMoveValue);
+            if (Vector3.Distance(transform.position, flyAwayTarget.transform.position) < closeEnoughDistance)
             {
                 isFlyingAway = false;
+                moveValue = 0f; // Reset moveValue
             }
         }
     }
