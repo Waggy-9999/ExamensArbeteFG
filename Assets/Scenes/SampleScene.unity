@@ -2718,75 +2718,11 @@ Transform:
   m_Father: {fileID: 185147289}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1368352969 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2241933117945761930, guid: b5e77392698311542b61d47a9b5066a6, type: 3}
-  m_PrefabInstance: {fileID: 97096951957730210}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1368352970 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2241933117945761929, guid: b5e77392698311542b61d47a9b5066a6, type: 3}
   m_PrefabInstance: {fileID: 97096951957730210}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1368352971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1368352969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a685df9f552fdb46af81929fd03c66f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GrowSpeed: 10
-  GrowFactor: 1.4
---- !u!114 &1368352974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1368352969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1368352971}
-          m_TargetAssemblyTypeName: CardHelper, Assembly-CSharp
-          m_MethodName: GrowCard
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1368352969}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1368352971}
-          m_TargetAssemblyTypeName: CardHelper, Assembly-CSharp
-          m_MethodName: ShrinkCard
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &1374859906
 GameObject:
   m_ObjectHideFlags: 0

@@ -220,6 +220,9 @@ GameObject:
   - component: {fileID: 2241933117945761929}
   - component: {fileID: 2241933117945762039}
   - component: {fileID: 2241933117945761928}
+  - component: {fileID: 1368352971}
+  - component: {fileID: 1368352974}
+  - component: {fileID: 1368352977}
   m_Layer: 5
   m_Name: CardTest
   m_TagString: Untagged
@@ -288,6 +291,77 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1368352971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241933117945761930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a685df9f552fdb46af81929fd03c66f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GrowSpeed: 10
+  GrowFactor: 1.4
+--- !u!114 &1368352974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241933117945761930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1368352971}
+          m_TargetAssemblyTypeName: CardHelper, Assembly-CSharp
+          m_MethodName: GrowCard
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 2241933117945761930}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1368352971}
+          m_TargetAssemblyTypeName: CardHelper, Assembly-CSharp
+          m_MethodName: ShrinkCard
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1368352977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241933117945761930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0852b60fe62351643a11fe428f75867b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2241933118016512601
 GameObject:
   m_ObjectHideFlags: 0
