@@ -8,6 +8,9 @@ public class Hand : MonoBehaviour
     [SerializeField] private List<GameObject> cardsInHand = new List<GameObject>(); // List to store the cards in hand
     [SerializeField] private GameObject cardPrefab; // Prefab for the card
     [SerializeField] private GameObject spawnPoint;
+    [SerializeField] private float duration = 1.0f;
+
+    [SerializeField] private EasingType easingType = EasingType.SineInOut;
 
     // Method to add a card to the hand
     public void AddCard()
@@ -67,7 +70,6 @@ public class Hand : MonoBehaviour
 
     private IEnumerator MoveCard(GameObject card, Vector3 targetPosition)
     {
-        float duration = 1.0f; // Duration of the animation in seconds
         float elapsed = 0.0f;
         Vector3 startPosition = card.transform.localPosition;
 
@@ -81,7 +83,7 @@ public class Hand : MonoBehaviour
 
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
-            t = Utility.Easing.Functions.GetEaseValue(EasingType.SineInOut, t); // Use the easing function
+            t = Utility.Easing.Functions.GetEaseValue(easingType, t); // Use the easing function
             card.transform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
             yield return null;
         }
