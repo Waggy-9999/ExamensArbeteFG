@@ -10,7 +10,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private GameObject spawnPoint;
     [SerializeField] private float duration = 1.0f;
 
-    [SerializeField] private EasingType easingType = EasingType.SineInOut;
+    [SerializeField] private EasingType easingType = EasingType.QuartOut;
 
     // Method to add a card to the hand
     public void AddCard()
@@ -46,25 +46,6 @@ public class Hand : MonoBehaviour
             }
 
             Debug.Log("Card removed from hand. Total cards in hand: " + cardsInHand.Count);
-        }
-    }
-    public void RemoveCardBtn(GameObject card)
-    {
-        if (cardsInHand.Count > 0) // Check if there are any cards in the hand
-        {
-            GameObject oldestCard = cardsInHand[0]; // Get the oldest card
-            cardsInHand.RemoveAt(0); // Remove the oldest card from the list
-            Destroy(oldestCard); // Destroy the card
-
-            // Adjust the position of all remaining cards based on the total number of cards
-            float cardWidth = oldestCard.GetComponent<RectTransform>().rect.width;
-            float totalWidth = cardWidth * cardsInHand.Count;
-            for (int i = 0; i < cardsInHand.Count; i++)
-            {
-                StartCoroutine(MoveCard(cardsInHand[i], new Vector3((i * cardWidth) - totalWidth / 2 + cardWidth / 2, 0, 0)));
-            }
-
-            Debug.Log("Oldest card removed from hand. Total cards in hand: " + cardsInHand.Count);
         }
     }
 

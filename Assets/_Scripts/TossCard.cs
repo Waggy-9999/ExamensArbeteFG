@@ -75,7 +75,7 @@ public class TossCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if (discardZone != null && Vector3.Distance(transform.position, discardZone.transform.position) < closeEnoughDistance)
             {
                 hand.RemoveCard(this.gameObject); // Remove this card from the hand
-                Debug.Log("Card removed from hand");
+                //Debug.Log("Card removed from hand");
             }
 
             if (Vector3.Distance(transform.position, flyAwayTo.transform.position) < closeEnoughDistance)
