@@ -27,25 +27,6 @@ public class Hand : MonoBehaviour
 
         Debug.Log("New card added to hand. Total cards in hand: " + cardsInHand.Count);
     }
-
-    private IEnumerator MoveCard(GameObject card, Vector3 targetPosition)
-    {
-        float duration = 1.0f; // Duration of the animation in seconds
-        float elapsed = 0.0f;
-        Vector3 startPosition = card.transform.localPosition;
-
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = elapsed / duration;
-            t = Utility.Easing.Functions.GetEaseValue(EasingType.SineInOut, t); // Use the easing function
-            card.transform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
-            yield return null;
-        }
-
-        card.transform.localPosition = targetPosition; // Ensure the card ends up at the exact target position
-    }
-
     public void RemoveCard(GameObject card)
     {
         if (cardsInHand.Contains(card)) // Check if the card is in the hand
@@ -64,7 +45,42 @@ public class Hand : MonoBehaviour
             cardsInHand.RemoveAt(0); // Remove the oldest card from the list
             Destroy(oldestCard); // Destroy the card
 
+            // Adjust the position of all remaining cards based on the total number of cards
+            float cardWidth = oldestCard.GetComponent<RectTransform>().rect.width;
+            float totalWidth = cardWidth * cardsInHand.Count;
+            for (int i = 0; i < cardsInHand.Count; i++)
+            {
+                StartCoroutine(MoveCard(cardsInHand[i], new Vector3((i * cardWidth) - totalWidth / 2 + cardWidth / 2, 0, 0)));
+            }
+
             Debug.Log("Oldest card removed from hand. Total cards in hand: " + cardsInHand.Count);
+        }
+    }
+
+    private IEnumerator MoveCard(GameObject card, Vector3 targetPosition)
+    {
+        float duration = 1.0f; // Duration of the animation in seconds
+        float elapsed = 0.0f;
+        Vector3 startPosition = card.transform.localPosition;
+
+        while (elapsed < duration)
+        {
+            // Check if the card still exists
+            if (card == null) // this is here cause if i delete cards too fast it breaks cause it cant find the card
+            {
+                yield break;
+            }
+
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            t = Utility.Easing.Functions.GetEaseValue(EasingType.SineInOut, t); // Use the easing function
+            card.transform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }
+        // Check if the card still exists
+        if (card != null)
+        {
+            card.transform.localPosition = targetPosition; // Ensure the card ends up at the exact target position
         }
     }
 }
