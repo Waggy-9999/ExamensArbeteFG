@@ -31,24 +31,29 @@ public class TossCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     }
 
     public void OnEndDrag(PointerEventData eventData)
+{
+    // Check if the card is over a GameObject with the tag "DiscardZone"
+    if (eventData.pointerCurrentRaycast.gameObject != null)
     {
-        // Check if the card is over a GameObject with the tag "DiscardZone"
-        if (eventData.pointerCurrentRaycast.gameObject != null)
-        {
-            //Debug.Log("Raycast hit: " + eventData.pointerCurrentRaycast.gameObject.name); // Log the name of the GameObject that was hit
+        //Debug.Log("Raycast hit: " + eventData.pointerCurrentRaycast.gameObject.name); // Log the name of the GameObject that was hit
 
-            if (eventData.pointerCurrentRaycast.gameObject.CompareTag("DiscardZone"))
-            {
-                hand.RemoveCard(this.gameObject); // Remove this card from the hand
-                //Debug.Log("Card removed from hand");
-            }
-            else if (eventData.pointerCurrentRaycast.gameObject.CompareTag("DropZone"))
-            {
-                isMovingToCenter = true;
-            }
+        if (eventData.pointerCurrentRaycast.gameObject.CompareTag("DiscardZone"))
+        {
+            hand.RemoveCard(this.gameObject); // Remove this card from the hand
+            //Debug.Log("Card removed from hand");
         }
-        //Debug.Log("OnEndDrag");
+        else if (eventData.pointerCurrentRaycast.gameObject.CompareTag("DropZone"))
+        {
+            isMovingToCenter = true;
+        }
+        else
+        {
+            // If the card is not dropped on a "DropZone", re-center the cards in the hand
+            hand.CenterCards();
+        }
     }
+    //Debug.Log("OnEndDrag");
+}
 
     private void Update()
     {
