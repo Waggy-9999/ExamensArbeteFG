@@ -3,10 +3,11 @@ using UnityEngine.EventSystems;
 using Utility.Easing;
 public class TossCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public Hand hand; // Reference to the hand script
     private Vector2 offset;
     private bool isMovingToCenter;
     private bool isFlyingAway;
-    [SerializeField] private GameObject flyAwayTarget;
+    [SerializeField] private GameObject flyAwayTo;
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float closeEnoughDistance = 0.1f;
     [SerializeField] private EasingType easingType = EasingType.SineIn; // Easing type to use
@@ -25,16 +26,28 @@ public class TossCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
         if (eventData.pointerCurrentRaycast.gameObject != null)
         {
-            Debug.Log("Hovering over GameObject with tag: " + eventData.pointerCurrentRaycast.gameObject.tag);
+            //Debug.Log("Hovering over GameObject with tag: " + eventData.pointerCurrentRaycast.gameObject.tag);
         }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (eventData.pointerCurrentRaycast.gameObject != null && eventData.pointerCurrentRaycast.gameObject.CompareTag("DropZone"))
+        // Check if the card is over a GameObject with the tag "DiscardZone"
+        if (eventData.pointerCurrentRaycast.gameObject != null)
         {
-            isMovingToCenter = true;
+            //Debug.Log("Raycast hit: " + eventData.pointerCurrentRaycast.gameObject.name); // Log the name of the GameObject that was hit
+
+            if (eventData.pointerCurrentRaycast.gameObject.CompareTag("DiscardZone"))
+            {
+                hand.RemoveCard(this.gameObject); // Remove this card from the hand
+                //Debug.Log("Card removed from hand");
+            }
+            else if (eventData.pointerCurrentRaycast.gameObject.CompareTag("DropZone"))
+            {
+                isMovingToCenter = true;
+            }
         }
+        //Debug.Log("OnEndDrag");
     }
 
     private void Update()
@@ -55,8 +68,17 @@ public class TossCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             moveValue += Time.unscaledDeltaTime * moveSpeed;
             float easedMoveValue = Functions.GetEaseValue(easingType, moveValue);
-            transform.position = Vector3.Lerp(transform.position, flyAwayTarget.transform.position, easedMoveValue);
-            if (Vector3.Distance(transform.position, flyAwayTarget.transform.position) < closeEnoughDistance)
+            transform.position = Vector3.Lerp(transform.position, flyAwayTo.transform.position, easedMoveValue);
+
+            // Check if the card has reached the "DiscardZone"
+            GameObject discardZone = GameObject.FindGameObjectWithTag("DiscardZone");
+            if (discardZone != null && Vector3.Distance(transform.position, discardZone.transform.position) < closeEnoughDistance)
+            {
+                hand.RemoveCard(this.gameObject); // Remove this card from the hand
+                Debug.Log("Card removed from hand");
+            }
+
+            if (Vector3.Distance(transform.position, flyAwayTo.transform.position) < closeEnoughDistance)
             {
                 isFlyingAway = false;
                 moveValue = 0f; // Reset moveValue

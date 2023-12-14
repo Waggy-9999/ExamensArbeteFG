@@ -34,6 +34,14 @@ public class Hand : MonoBehaviour
             cardsInHand.Remove(card); // Remove the card from the list
             Destroy(card); // Destroy the card
 
+            // Adjust the position of all remaining cards based on the total number of cards
+            float cardWidth = card.GetComponent<RectTransform>().rect.width;
+            float totalWidth = cardWidth * cardsInHand.Count;
+            for (int i = 0; i < cardsInHand.Count; i++)
+            {
+                StartCoroutine(MoveCard(cardsInHand[i], new Vector3((i * cardWidth) - totalWidth / 2 + cardWidth / 2, 0, 0)));
+            }
+
             Debug.Log("Card removed from hand. Total cards in hand: " + cardsInHand.Count);
         }
     }

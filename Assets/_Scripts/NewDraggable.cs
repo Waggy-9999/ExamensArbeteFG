@@ -11,19 +11,19 @@ public class NewDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public void OnBeginDrag(PointerEventData eventData)
     {
         offset = (Vector2)transform.position - eventData.position;
-        Debug.Log("OnBeginDrag");
+        //Debug.Log("OnBeginDrag");
     }
 
     // OnDrag is called every frame while the user is dragging the GameObject.
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("OnDrag");
+        //Debug.Log("OnDrag");
         transform.position = eventData.position + offset;
     }
 
     // OnEndDrag is called when the user stops dragging the GameObject.
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
+        //Debug.Log("OnEndDrag");
     }
 }
