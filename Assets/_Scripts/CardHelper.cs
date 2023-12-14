@@ -19,6 +19,10 @@ public class CardHelper : MonoBehaviour
             StartCoroutine("Shrink");
         }
         cardReference = card;
+
+        // Move this card to the top of the UI
+        cardReference.transform.SetAsLastSibling();
+        
         StartCoroutine("Grow");
     }
     public void ShrinkCard()

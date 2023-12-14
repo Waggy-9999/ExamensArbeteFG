@@ -16,6 +16,9 @@ public class TossCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnBeginDrag(PointerEventData eventData)
     {
         offset = (Vector2)transform.position - eventData.position;
+
+        // Move this card to the top of the UI
+        transform.SetAsLastSibling();
     }
 
     public void OnDrag(PointerEventData eventData)
