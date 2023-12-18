@@ -28,7 +28,7 @@ public class Hand : MonoBehaviour
 
         // Calculate the total width of all cards in hand
         float cardWidth = newCard.GetComponent<RectTransform>().rect.width;
-        float totalWidth = cardWidth * cardsInHand.Count;
+        float totalWidth = cardWidth * cardsInHand.Count; 
 
         // Adjust the position of all cards in hand
         for (int i = 0; i < cardsInHand.Count; i++)
@@ -39,6 +39,30 @@ public class Hand : MonoBehaviour
         Debug.Log("New card added to hand. Total cards in hand: " + cardsInHand.Count);
     }
 
+    public void AddMultipleCards(int numCards)
+        {
+            for (int j = 0; j < numCards; j++)
+            {
+                // Instantiate a new card at the spawn point
+                GameObject newCard = Instantiate(cardPrefab, spawnPoint.transform.position, Quaternion.identity); 
+                newCard.transform.SetParent(transform); // Set the new card's parent to the hand
+
+                // Add the new card to the list of cards in hand
+                cardsInHand.Add(newCard);
+
+                // Calculate the total width of all cards in hand
+                float cardWidth = newCard.GetComponent<RectTransform>().rect.width;
+                float totalWidth = cardWidth * cardsInHand.Count;
+
+                // Adjust the position of all cards in hand
+                for (int i = 0; i < cardsInHand.Count; i++)
+                {
+                    StartCoroutine(MoveCard(cardsInHand[i], new Vector3((i * cardWidth) - totalWidth / 2 + cardWidth / 2, 0, 0)));
+                }
+
+                Debug.Log("New card added to hand. Total cards in hand: " + cardsInHand.Count);
+            }
+        }
     /// <summary>
     /// Method to remove a card from the hand.
     /// </summary>
