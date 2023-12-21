@@ -13,7 +13,6 @@ public class Hand : MonoBehaviour
     [SerializeField] private GameObject spawnPoint; // The point where new cards are spawned
     [SerializeField] private float duration = 1.0f; // Duration for the card movement animation
     [SerializeField] private EasingType easingType = EasingType.QuartOut; // Easing type for the card movement animation
-    public Turn turn; // Reference to the turn script
 
     /// <summary>
     /// Method to add a card to the hand.
@@ -95,21 +94,6 @@ public class Hand : MonoBehaviour
             Vector3 targetPosition = new Vector3((i * cardWidth) - totalWidth / 2 + cardWidth / 2, 0, 0);
             StartCoroutine(MoveCard(cardsInHand[i], targetPosition));
         }
-    }
-
-    public void ResetHand()
-    {
-        // Toss all cards
-        while (cardsInHand.Count > 0)
-        {
-            RemoveCard(cardsInHand[0]);
-        }
-
-        // Reset manaCount to 3
-        turn.manaCount = 3;
-
-        // Add multiple new cards
-        AddMultipleCards(7); // Replace 3 with the number of new cards you want to add
     }
 
     /// <summary>

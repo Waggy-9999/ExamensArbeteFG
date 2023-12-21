@@ -4,7 +4,6 @@ using Utility.Easing;
 public class TossCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Hand hand; // Reference to the hand script
-    public Turn turn; // Reference to the turn script
     private Vector2 offset;
     private bool isMovingToCenter;
     private bool isFlyingAway;
@@ -46,17 +45,12 @@ public class TossCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 if (hand != null) // Check if hand is not null
                 {
                     hand.RemoveCard(this.gameObject); // Remove this card from the hand
-                    
                     //Debug.Log("Card removed from hand");
                 }
             }
             else if (eventData.pointerCurrentRaycast.gameObject.CompareTag("DropZone"))
             {
                 isMovingToCenter = true;
-
-                // Decreases Mana by 1, if mana 0, resets hand
-                turn.PlayCard();
-                Debug.Log("Mana: " + turn.manaCount);
             }
             else
             {
